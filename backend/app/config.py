@@ -19,3 +19,9 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=8)
 
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
+
+    SMTP_HOST = os.getenv("SMTP_HOST")
+    SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+    SMTP_USER = os.getenv("SMTP_USER")
+    SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+    SMTP_FROM = os.getenv("SMTP_FROM")    

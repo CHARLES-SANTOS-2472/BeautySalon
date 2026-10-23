@@ -5,3 +5,6 @@ from .categoria_servico import CategoriaServico
 from .servico import Servico
 from .produto import Produto
 from .agendamento import Agendamento
+from .venda import Venda
+from .item_venda import ItemVenda
+from .token_recuperacao_senha import TokenRecuperacaoSenha

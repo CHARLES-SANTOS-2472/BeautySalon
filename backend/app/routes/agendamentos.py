@@ -314,10 +314,7 @@ def excluir_agendamento(id):
 # ALTERAR STATUS DO AGENDAMENTO
 # ========================================================
 
-@agendamentos_bp.route(
-    "/agendamentos/<int:id>/status",
-    methods=["PUT"]
-)
+@agendamentos_bp.route("/agendamentos/<int:id>/status", methods=["PUT"])
 @jwt_required()
 def alterar_status(id):
 
@@ -357,69 +354,3 @@ def alterar_status(id):
 
 
 
-
-
-
-"""# ========================================================
-# ALTERAR STATUS DO AGENDAMENTO
-# ========================================================
-
-@agendamentos_bp.route(
-    "/agendamentos/<int:id>/status",
-    methods=["PUT"]
-)
-@jwt_required()
-def alterar_status(id):
-
-    agendamento = Agendamento.query.get_or_404(id)
-
-    dados = request.get_json()
-
-    novo_status = dados.get("status")
-
-
-    status_permitidos = [
-        "Agendado",
-        "Confirmado",
-        "Em atendimento",
-        "Finalizado",
-        "Cancelado"
-    ]
-
-
-    if novo_status not in status_permitidos:
-
-        return jsonify({
-            "erro": "Status inválido",
-            "permitidos": status_permitidos
-        }), 400
-
-
-    agendamento.status = novo_status
-
-    db.session.commit()
-
-
-    return jsonify({
-        "mensagem": "Status atualizado com sucesso!",
-        "status": agendamento.status
-    })"""
-
-
-
-
-
-
-"""# ========================================================
-# TO_DICT
-# ========================================================
-def to_dict(self):
-    return {
-        "id": self.id,
-        "cliente_id": self.cliente_id,
-        "funcionario_id": self.funcionario_id,
-        "servico_id": self.servico_id,
-        "data_hora": self.data_hora.isoformat() if self.data_hora else None,
-        "status": self.status,
-        "observacoes": self.observacoes
-    }"""

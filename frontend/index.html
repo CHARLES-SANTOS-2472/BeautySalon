@@ -2,20 +2,530 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beauty Salon</title>
-
-    <link href="css/style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
+    <header class="topo">
+        <div>
+            <p class="marca">Beauty Salon</p>
+            <h1>Dashboard</h1>
+        </div>
 
-<h1>Beauty Salon</h1>
+        <div class="acoes-topo">
+            <button id="btnAbrirSenha" class="botao-secundario escondido">
+                Alterar senha
+            </button>
 
-<button id="btnAPI">
-Conectar API
-</button>
+            <button id="btnSair" class="botao-secundario escondido">
+                Sair
+            </button>
+        </div>
+    </header>
 
-<script src="js/app.js"></script>
 
+
+    <nav id="navegacaoPrincipal" class="navegacao-principal escondido">
+        <button data-tela="dashboard" class="nav-item ativo">
+            Dashboard
+        </button>
+
+        <button data-tela="clientes" class="nav-item">
+            Clientes
+        </button>
+
+        <button data-tela="funcionarios" class="nav-item">
+            Funcionários
+        </button>
+
+        <button data-tela="categorias" class="nav-item">
+            Categorias
+        </button>
+
+
+    </nav>
+
+
+
+
+    <main class="conteudo">
+        <section id="telaLogin" class="cartao login">
+            <p class="subtitulo">Acesse o painel do seu salão</p>
+
+            <form id="formLogin">
+                <label for="apiUrl">Endereço da API</label>
+                <input
+                    id="apiUrl"
+                    type="url"
+                    value="http://127.0.0.1:5000"
+                    required
+                >
+
+                <label for="email">E-mail</label>
+                <input id="email" type="email" required>
+
+                <label for="senha">Senha</label>
+                <input id="senha" type="password" required>
+
+                <button type="submit" class="botao-principal">
+                    Entrar
+                </button>
+            </form>
+
+
+
+            <button
+                id="btnEsqueciSenha"
+                type="button"
+                class="link-botao"
+            >
+                Esqueci minha senha
+            </button>
+
+            <p id="mensagemLogin" class="mensagem"></p>
+        </section>
+
+
+
+
+        
+
+
+
+
+        <section id="telaRecuperarSenha" class="cartao login escondido">
+            <div id="etapaSolicitarCodigo">
+                <h2>Recuperar senha</h2>
+
+                <p class="subtitulo">
+                    Informe seu e-mail para receber um código de recuperação.
+                </p>
+
+                <form id="formSolicitarCodigo">
+                    <label for="emailRecuperacao">E-mail cadastrado</label>
+                    <input
+                        id="emailRecuperacao"
+                        type="email"
+                        required
+                    >
+
+                    <button type="submit" class="botao-principal">
+                        Enviar código
+                    </button>
+
+                    <button
+                        id="btnVoltarLogin"
+                        type="button"
+                        class="botao-secundario"
+                    >
+                        Voltar ao login
+                    </button>
+                </form>
+
+                <p id="mensagemRecuperacao" class="mensagem"></p>
+            </div>
+
+            <div id="etapaRedefinirSenha" class="escondido">
+                <h2>Criar nova senha</h2>
+
+                <p class="subtitulo">
+                    Digite o código recebido por e-mail.
+                </p>
+
+                <form id="formRedefinirSenha">
+                    <label for="emailRedefinir">E-mail</label>
+                    <input
+                        id="emailRedefinir"
+                        type="email"
+                        readonly
+                    >
+
+                    <label for="codigoRecuperacao">Código de recuperação</label>
+                    <input
+                        id="codigoRecuperacao"
+                        type="text"
+                        inputmode="numeric"
+                        maxlength="6"
+                        required
+                    >
+
+                    <label for="novaSenhaRecuperacao">Nova senha</label>
+                    <input
+                        id="novaSenhaRecuperacao"
+                        type="password"
+                        minlength="8"
+                        required
+                    >
+
+                    <label for="confirmarSenhaRecuperacao">
+                        Confirmar nova senha
+                    </label>
+                    <input
+                        id="confirmarSenhaRecuperacao"
+                        type="password"
+                        minlength="8"
+                        required
+                    >
+
+                    <button type="submit" class="botao-principal">
+                        Redefinir senha
+                    </button>
+
+                    <button
+                        id="btnCancelarRecuperacao"
+                        type="button"
+                        class="botao-secundario"
+                    >
+                        Cancelar
+                    </button>
+                </form>
+
+                <p id="mensagemRedefinirSenha" class="mensagem"></p>
+            </div>
+        </section>
+
+
+
+        <section id="telaSenha" class="cartao login escondido">
+            <h2>Alterar senha</h2>
+            <p class="subtitulo">
+                Informe sua senha atual e escolha uma nova senha.
+            </p>
+
+            <form id="formSenha">
+                <label for="senhaAtual">Senha atual</label>
+                <input id="senhaAtual" type="password" required>
+
+                <label for="novaSenha">Nova senha</label>
+                <input
+                    id="novaSenha"
+                    type="password"
+                    minlength="8"
+                    required
+                >
+
+                <label for="confirmarNovaSenha">
+                    Confirmar nova senha
+                </label>
+                <input
+                    id="confirmarNovaSenha"
+                    type="password"
+                    minlength="8"
+                    required
+                >
+
+                <button type="submit" class="botao-principal">
+                    Salvar nova senha
+                </button>
+
+                <button
+                    id="btnCancelarSenha"
+                    type="button"
+                    class="botao-secundario"
+                >
+                    Cancelar
+                </button>
+            </form>
+
+            <p id="mensagemSenha" class="mensagem"></p>
+        </section>
+
+
+
+
+        <section id="telaDashboard" class="escondido">
+
+            <div class="boas-vindas">
+                <div>
+                    <p class="subtitulo">Visão geral</p>
+                    <h2>Seu salão em números</h2>
+                </div>
+
+                <button id="btnAtualizar" class="botao-secundario">
+                    Atualizar
+                </button>
+            </div>
+
+            <p id="mensagemDashboard" class="mensagem"></p>
+
+            <section class="grade-indicadores">
+                <article class="cartao indicador">
+                    <span>Clientes</span>
+                    <strong id="clientes">0</strong>
+                </article>
+
+                <article class="cartao indicador">
+                    <span>Funcionários</span>
+                    <strong id="funcionarios">0</strong>
+                </article>
+
+                <article class="cartao indicador">
+                    <span>Agendamentos</span>
+                    <strong id="agendamentos">0</strong>
+                </article>
+
+                <article class="cartao indicador destaque">
+                    <span>Agendamentos hoje</span>
+                    <strong id="agendamentosHoje">0</strong>
+                </article>
+
+                <article class="cartao indicador">
+                    <span>Vendas</span>
+                    <strong id="vendas">0</strong>
+                </article>
+
+                <article class="cartao indicador destaque">
+                    <span>Faturamento</span>
+                    <strong id="faturamento">R$ 0,00</strong>
+                </article>
+            </section>
+
+            <section class="grade-conteudo">
+                <article class="cartao">
+                    <h3>Estoque</h3>
+                    <p class="estoque-baixo">
+                        Produtos com estoque baixo:
+                        <strong id="estoqueBaixo">0</strong>
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>Serviços mais realizados</h3>
+                    <ul id="listaServicos" class="lista-ranking"></ul>
+                </article>
+
+                <article class="cartao">
+                    <h3>Produtos mais vendidos</h3>
+                    <ul id="listaProdutos" class="lista-ranking"></ul>
+                </article>
+            </section>
+        </section>
+
+
+
+        <section id="telaClientes" class="escondido">
+            
+            <div class="boas-vindas">
+                <div>
+                    <p class="subtitulo">Gestão</p>
+                    <h2>Clientes</h2>
+                </div>
+
+                <div class="acoes-clientes">
+                    <button id="btnNovoCliente" class="botao-principal">
+                        Novo cliente
+                    </button>
+
+                    <button id="btnAtualizarClientes" class="botao-secundario">
+                        Atualizar
+                    </button>
+                </div>
+            </div>
+
+
+
+            <input
+                id="buscaCliente"
+                type="search"
+                placeholder="Buscar por nome, telefone ou e-mail"
+            >
+
+            <p id="mensagemClientes" class="mensagem"></p>
+
+            <section id="listaClientes" class="lista-clientes"></section>
+        </section>
+
+
+
+
+
+        <section id="telaFormularioCliente" class="cartao login escondido">
+            <p class="subtitulo">Gestão de clientes</p>
+            <h2 id="tituloFormularioCliente">Novo cliente</h2>
+
+            <form id="formCliente">
+                <label for="clienteNome">Nome *</label>
+                <input id="clienteNome" type="text" required>
+
+                <label for="clienteCpf">CPF</label>
+                <input id="clienteCpf" type="text">
+
+                <label for="clienteTelefone">Telefone</label>
+                <input id="clienteTelefone" type="tel">
+
+                <label for="clienteEmail">E-mail</label>
+                <input id="clienteEmail" type="email">
+
+                <label for="clienteNascimento">Data de nascimento</label>
+                <input id="clienteNascimento" type="date">
+
+                <label for="clienteEndereco">Endereço</label>
+                <input id="clienteEndereco" type="text">
+
+                <label for="clienteObservacoes">Observações</label>
+                <textarea id="clienteObservacoes" rows="4"></textarea>
+
+                <button type="submit" class="botao-principal">
+                    Salvar cliente
+                </button>
+
+                <button
+                    id="btnCancelarFormularioCliente"
+                    type="button"
+                    class="botao-secundario"
+                >
+                    Cancelar
+                </button>
+            </form>
+
+            <p id="mensagemFormularioCliente" class="mensagem"></p>
+        </section>
+
+
+
+        <section id="telaFuncionarios" class="escondido">
+            <div class="boas-vindas">
+                <div>
+                    <p class="subtitulo">Gestão</p>
+                    <h2>Funcionários</h2>
+                </div>
+
+                <div class="acoes-clientes">
+                    <button id="btnNovoFuncionario" class="botao-principal">
+                        Novo funcionário
+                    </button>
+
+                    <button id="btnAtualizarFuncionarios" class="botao-secundario">
+                        Atualizar
+                    </button>
+                </div>
+            </div>
+
+            <input
+                id="buscaFuncionario"
+                type="search"
+                placeholder="Buscar por nome, telefone ou cargo"
+            >
+
+            <p id="mensagemFuncionarios" class="mensagem"></p>
+
+            <section
+                id="listaFuncionarios"
+                class="lista-clientes"
+            ></section>
+        </section>
+
+        <section id="telaFormularioFuncionario" class="cartao login escondido">
+            <p class="subtitulo">Gestão de funcionários</p>
+            <h2 id="tituloFormularioFuncionario">Novo funcionário</h2>
+
+            <form id="formFuncionario">
+                <label for="funcionarioNome">Nome *</label>
+                <input id="funcionarioNome" type="text" required>
+
+                <label for="funcionarioTelefone">Telefone</label>
+                <input id="funcionarioTelefone" type="tel">
+
+                <label for="funcionarioCargo">Cargo</label>
+                <input id="funcionarioCargo" type="text">
+
+                <label for="funcionarioComissao">
+                    Comissão (%)
+                </label>
+                <input
+                    id="funcionarioComissao"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                >
+
+                <button type="submit" class="botao-principal">
+                    Salvar funcionário
+                </button>
+
+                <button
+                    id="btnCancelarFormularioFuncionario"
+                    type="button"
+                    class="botao-secundario"
+                >
+                    Cancelar
+                </button>
+            </form>
+
+            <p id="mensagemFormularioFuncionario" class="mensagem"></p>
+        </section>
+
+        <section id="telaCategorias" class="escondido">
+            <div class="boas-vindas">
+                <div>
+                    <p class="subtitulo">Configurações</p>
+                    <h2>Categorias de serviços</h2>
+                </div>
+
+                <div class="acoes-clientes">
+                    <button id="btnNovaCategoria" class="botao-principal">
+                        Nova categoria
+                    </button>
+
+                    <button id="btnAtualizarCategorias" class="botao-secundario">
+                        Atualizar
+                    </button>
+                </div>
+            </div>
+
+            <p id="mensagemCategorias" class="mensagem"></p>
+
+            <section
+                id="listaCategorias"
+                class="lista-clientes"
+            ></section>
+        </section>
+
+        <section id="telaFormularioCategoria" class="cartao login escondido">
+            <p class="subtitulo">Categorias de serviços</p>
+            <h2 id="tituloFormularioCategoria">Nova categoria</h2>
+
+            <form id="formCategoria">
+                <label for="categoriaNome">Nome *</label>
+                <input id="categoriaNome" type="text" required>
+
+                <button type="submit" class="botao-principal">
+                    Salvar categoria
+                </button>
+
+                <button
+                    id="btnCancelarFormularioCategoria"
+                    type="button"
+                    class="botao-secundario"
+                >
+                    Cancelar
+                </button>
+            </form>
+
+            <p id="mensagemFormularioCategoria" class="mensagem"></p>
+        </section>
+
+
+
+
+
+
+
+    </main>
+
+    <nav id="navegacaoMobile" class="navegacao-mobile escondido">
+        <button data-tela="dashboard" class="nav-item ativo">
+            Dashboard
+        </button>
+
+        <button data-tela="clientes" class="nav-item">
+            Clientes
+        </button>
+    </nav>
+    
+<script src="app.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required
 
 from app.extensions import db
 from app.models.categoria_servico import CategoriaServico
+from app.models.servico import Servico
 
 
 categorias_servico_bp = Blueprint(
@@ -131,6 +132,17 @@ def atualizar_categoria(id):
 def excluir_categoria(id):
 
     categoria = CategoriaServico.query.get_or_404(id)
+
+    servico_vinculado = Servico.query.filter_by(categoria_id=categoria.id).first()
+
+    if servico_vinculado:
+        return jsonify({
+            "erro": (
+                "Não é possível remover esta categoria "
+                "pois existem serviços vinculados a ela."
+            )
+        }), 400
+
 
     db.session.delete(categoria)
     db.session.commit()

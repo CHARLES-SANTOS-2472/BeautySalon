@@ -42,29 +42,40 @@ def cadastrar_cliente():
             "erro": "O nome é obrigatório."
         }), 400
 
-    # Verifica CPF duplicado
+    # Verifica CPF existente
     cpf = dados.get("cpf")
 
     if cpf:
-        cliente = Cliente.query.filter_by(cpf=cpf).first()
+        cliente_existente = Cliente.query.filter_by(
+            cpf=cpf
+        ).first()
 
-        if cliente:
+        if cliente_existente:
+            if cliente_existente.ativo:
+                return jsonify({
+                    "erro": "CPF já cadastrado."
+                }), 400
+
+            cliente_existente.ativo = True
+
+            db.session.commit()
+
             return jsonify({
-                "erro": "CPF já cadastrado."
-            }), 400
+                "mensagem": "Cliente reativado com sucesso.",
+                "cliente": cliente_existente.to_dict()
+            }), 200
 
 
-    if dados.get("email"):
+    if not dados.get("email"):
 
         existe = Cliente.query.filter_by(
             email=dados["email"]
         ).first()
 
-    if existe:
-        return jsonify({
-            "erro":"E-mail já cadastrado."
-        }),400
-
+        if existe:
+            return jsonify({
+                "erro":"E-mail já cadastrado."
+            }),400
 
     data_nascimento = None
 
@@ -197,6 +208,60 @@ def excluir_cliente(id):
     return jsonify({
         "mensagem": "Cliente desativado com sucesso."
     })
+
+
+
+
+
+# ==========================================
+# LISTAR CLIENTES INATIVOS
+# ==========================================
+@clientes_bp.route("/clientes/inativos", methods=["GET"])
+@jwt_required()
+@perfil_requerido("Administrador", "Gerente")
+def listar_clientes_inativos():
+
+    clientes = Cliente.query.filter_by(
+        ativo=False
+    ).all()
+
+    return jsonify([
+        cliente.to_dict()
+        for cliente in clientes
+    ]), 200
+
+
+# ==========================================
+# REATIVAR CLIENTE
+# ==========================================
+@clientes_bp.route(
+    "/clientes/<int:id>/reativar",
+    methods=["PUT"]
+)
+@jwt_required()
+@perfil_requerido("Administrador", "Gerente")
+def reativar_cliente(id):
+
+    cliente = Cliente.query.get(id)
+
+    if cliente is None:
+        return jsonify({
+            "erro": "Cliente não encontrado."
+        }), 404
+
+    if cliente.ativo:
+        return jsonify({
+            "erro": "Cliente já está ativo."
+        }), 400
+
+    cliente.ativo = True
+
+    db.session.commit()
+
+    return jsonify({
+        "mensagem": "Cliente reativado com sucesso.",
+        "cliente": cliente.to_dict()
+    }), 200
 
 
 

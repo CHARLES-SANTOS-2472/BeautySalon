@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Salon</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="topo">
+        <div>
+            <p class="marca">Beauty Salon</p>
+            <h1>Dashboard</h1>
+        </div>
+
+
+        <div class="acoes-topo">
+            <button id="btnAbrirSenha" class="botao-secundario escondido">
+                Alterar senha
+            </button>
+
+            <button id="btnSair" class="botao-secundario escondido">
+                Sair
+            </button>
+        </div>
+
+
+
+
+
+
+        <button id="btnSair" class="botao-secundario escondido">
+            Sair
+        </button>
+    </header>
+
+    <main class="conteudo">
+        <section id="telaLogin" class="cartao login">
+            <p class="subtitulo">Acesse o painel do seu salão</p>
+
+            <form id="formLogin">
+                <label for="apiUrl">Endereço da API</label>
+                <input
+                    id="apiUrl"
+                    type="url"
+                    value="http://127.0.0.1:5000"
+                    required
+                >
+
+                <label for="email">E-mail</label>
+                <input id="email" type="email" required>
+
+                <label for="senha">Senha</label>
+                <input id="senha" type="password" required>
+
+                <button type="submit" class="botao-principal">
+                    Entrar
+                </button>
+            </form>
+
+            <p id="mensagemLogin" class="mensagem"></p>
+        </section>
+
+        <section id="telaDashboard" class="escondido">
+            <div class="boas-vindas">
+                <div>
+                    <p class="subtitulo">Visão geral</p>
+                    <h2>Seu salão em números</h2>
+                </div>
+
+                <button id="btnAtualizar" class="botao-secundario">
+                    Atualizar
+                </button>
+            </div>
+
+            <p id="mensagemDashboard" class="mensagem"></p>
+
+            <section class="grade-indicadores">
+                <article class="cartao indicador">
+                    <span>Clientes</span>
+                    <strong id="clientes">0</strong>
+                </article>
+
+                <article class="cartao indicador">
+                    <span>Funcionários</span>
+                    <strong id="funcionarios">0</strong>
+                </article>
+
+                <article class="cartao indicador">
+                    <span>Agendamentos</span>
+                    <strong id="agendamentos">0</strong>
+                </article>
+
+                <article class="cartao indicador destaque">
+                    <span>Agendamentos hoje</span>
+                    <strong id="agendamentosHoje">0</strong>
+                </article>
+
+                <article class="cartao indicador">
+                    <span>Vendas</span>
+                    <strong id="vendas">0</strong>
+                </article>
+
+                <article class="cartao indicador destaque">
+                    <span>Faturamento</span>
+                    <strong id="faturamento">R$ 0,00</strong>
+                </article>
+            </section>
+
+            <section class="grade-conteudo">
+                <article class="cartao">
+                    <h3>Estoque</h3>
+                    <p class="estoque-baixo">
+                        Produtos com estoque baixo:
+                        <strong id="estoqueBaixo">0</strong>
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>Serviços mais realizados</h3>
+                    <ul id="listaServicos" class="lista-ranking"></ul>
+                </article>
+
+                <article class="cartao">
+                    <h3>Produtos mais vendidos</h3>
+                    <ul id="listaProdutos" class="lista-ranking"></ul>
+                </article>
+            </section>
+        </section>
+    </main>
+
+    <nav class="navegacao-mobile">
+        <span>Dashboard</span>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>
