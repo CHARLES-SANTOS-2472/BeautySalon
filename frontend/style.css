@@ -1,12 +1,12 @@
 :root {
-    --rosa: #b83b71;
-    --rosa-claro: #fff0f6;
-    --texto: #2b2025;
-    --cinza: #6d6267;
-    --borda: #eadde3;
-    --fundo: #fff8fb;
+    --rosa: #176b45;
+    --rosa-claro: #e9f7ef;
+    --texto: #173524;
+    --cinza: #5e7165;
+    --borda: #cfe6d6;
+    --fundo: #f4fbf6;
     --branco: #ffffff;
-    --verde: #26734d;
+    --verde: #176b45;
 }
 
 * {
@@ -53,7 +53,7 @@ h3 {
     background: var(--branco);
     border: 1px solid var(--borda);
     border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(80, 30, 52, 0.05);
+    box-shadow: 0 4px 14px rgba(23, 107, 69, 0.08);
 }
 
 .login {
@@ -127,7 +127,7 @@ button {
 }
 
 .destaque {
-    border-color: #efb6d0;
+    border-color: #a9d7b9;
     background: var(--rosa-claro);
 }
 
@@ -249,7 +249,7 @@ button {
     display: grid;
     place-items: center;
     padding: 20px;
-    background: rgba(43, 32, 37, 0.55);
+    background: rgba(13, 66, 42, 0.55);
 }
 
 .modal-conteudo {
@@ -360,4 +360,32 @@ textarea {
 .funcionario-item p {
     color: var(--cinza);
     font-size: 14px;
+}
+
+button,
+input,
+textarea {
+    transition: border-color 0.2s ease, background-color 0.2s ease,
+        color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--rosa);
+    box-shadow: 0 0 0 3px rgba(23, 107, 69, 0.14);
+}
+
+.botao-principal:hover {
+    background: #0f5736;
+    transform: translateY(-1px);
+}
+
+.botao-secundario:hover,
+.nav-item.ativo:hover {
+    background: #d8f0e0;
+}
+
+.botao-perigo:hover {
+    background: #ffe2e2;
 }
